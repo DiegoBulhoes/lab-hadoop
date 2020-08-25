@@ -1,0 +1,5 @@
+- name: Format namenode
+  become: yes
+  command:
+    cmd: "{{hadoop_home}}/bin/hdfs namenode -format"
+    warn: false

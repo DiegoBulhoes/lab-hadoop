@@ -1,0 +1,12 @@
+
+- name: User hadoop
+  become: yes
+  import_tasks: ./user-hadoop.yml
+
+- name: Dowload hadoop
+  become: yes
+  import_tasks: ./dowload-hadoop.yml
+
+- name: Config hadoop
+  become: yes
+  import_tasks: ./config-hadoop.yml

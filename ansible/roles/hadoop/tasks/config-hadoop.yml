@@ -1,0 +1,56 @@
+- name: "Insert env Hadoop - bashrc"
+  blockinfile:
+    path: "/home/{{user_name}}/.bashrc"
+    block: |
+      export JAVA_HOME="{{java_home}}"
+      export HADOOP_HOME="{{hadoop_home}}"
+      export HADOOP_MAPRED_HOME="{{hadoop_home}}"
+      export HADOOP_COMMON_HOME="{{hadoop_home}}"
+      export HADOOP_HDFS_HOME="{{hadoop_home}}"
+      export HADOOP_YARN_HOME="{{hadoop_home}}"
+      export HADOOP_CONF_DIR="{{hadoop_home}}/etc/hadoop"
+
+- name: "Add hdfs-site.xml"
+  copy:
+    src: "hdfs-site.xml"
+    dest: "{{hadoop_home}}/etc/hadoop/"
+    
+- name: Add files template -  hadoop
+  template:
+    src: "{{item.src}}"
+    dest: "{{item.dest}}"
+  with_items:
+    - { src: "hdfs-site.xml", dest: "{{hadoop_home}}/etc/hadoop/hdfs-site.xml" }
+    - { src: "core-site.xml", dest: "{{hadoop_home}}/etc/hadoop/core-site.xml" }
+    - { src: "hadoop-env.sh", dest: "{{hadoop_home}}/etc/hadoop/hadoop-env.sh" }
+    - { src: "yarn-env.sh", dest: "{{hadoop_home}}/etc/hadoop/yarn-env.sh" }
+    - {
+        src: "mapred-site.xml",
+        dest: "{{hadoop_home}}/etc/hadoop/mapred-site.xml",
+      }
+    - { src: "yarn-site.xml", dest: "{{hadoop_home}}/etc/hadoop/yarn-site.xml" }
+    - { src: "masters", dest: "{{hadoop_home}}/etc/hadoop/masters" }
+    - { src: "slaves", dest: "{{hadoop_home}}/etc/hadoop/slaves" }
+    - { src: "workers", dest: "{{hadoop_home}}/etc/hadoop/workers" }
+
+- name: "Create a directory tmp"
+  file:
+    path: "{{ item }}"
+    state: "directory"
+  loop:
+    - "{{hadoop_home}}/tmp/hdfs/namenode"
+    - "{{hadoop_home}}/tmp/hdfs/datanode"
+    - "{{hadoop_home}}/logs"
+    - "/tmp/hadoop-hadoop/dfs/namenode"
+    - "/tmp/hadoop-hadoop/dfs/name"
+    - "/tmp/hadoop-hadoop/"
+
+- name: "Change hadoop files permission"
+  file:
+    path: "{{item}}"
+    owner: "hadoop"
+    group: "hadoop"
+    recurse: yes
+  loop:
+    - "{{hadoop_home}}"
+    - "/tmp/hadoop-hadoop/"
