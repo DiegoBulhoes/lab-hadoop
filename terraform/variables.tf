@@ -30,18 +30,14 @@ variable "ip_cidr_range_public" {
   type = string
 }
 
-variable "ip_cidr_range_private" {
-  type = string
-}
-
 variable "key_ssh" {
   type = string
 }
 
-variable "port_firewall_public" {
+variable "publ_net_firewall_port_UDP" {
   type = list
 }
 
-variable "port_firewall_private" {
+variable "publ_net_firewall_port_TCP" {
   type = list
 }

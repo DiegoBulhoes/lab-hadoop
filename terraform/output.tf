@@ -1,5 +1,5 @@
-output "worker_private" {
-  value = module.compute_instance.worker_private
+output "worker_pinternal" {
+  value = module.compute_instance.worker_pinternal
 }
 
 output "manager_public" {

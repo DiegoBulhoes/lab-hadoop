@@ -1,9 +1,3 @@
-
-output "private_subnetwork" {
-  description = "Private subnetwork"
-  value       = google_compute_subnetwork.private_subnetwork.self_link
-}
-
 output "network" {
   description = "VPC network"
   value       = google_compute_network.vpc_network.self_link
