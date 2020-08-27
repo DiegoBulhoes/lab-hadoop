@@ -1,2 +1,4 @@
-ip_slaves: "{{ groups['worker'] | map('extract', hostvars, ['ansible_default_ipv4', 'address']) | list }}"
-ip_master: "{{ groups['manager'][0] }}"
+ip_slaves: ["10.10.10.2"]
+ip_master: "10.10.10.3"
+
+ip_intern_master: "10.10.10.3"

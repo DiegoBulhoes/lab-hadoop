@@ -8,14 +8,11 @@
       export HADOOP_COMMON_HOME="{{hadoop_home}}"
       export HADOOP_HDFS_HOME="{{hadoop_home}}"
       export HADOOP_YARN_HOME="{{hadoop_home}}"
+      export PATH=/usr/local/bin/hadoop:/usr/local/sbin/hadoop:$PATH
       export HADOOP_CONF_DIR="{{hadoop_home}}/etc/hadoop"
 
-- name: "Add hdfs-site.xml"
-  copy:
-    src: "hdfs-site.xml"
-    dest: "{{hadoop_home}}/etc/hadoop/"
-    
-- name: Add files template -  hadoop
+
+- name: "Add files template -  hadoop"
   template:
     src: "{{item.src}}"
     dest: "{{item.dest}}"
@@ -33,14 +30,16 @@
     - { src: "slaves", dest: "{{hadoop_home}}/etc/hadoop/slaves" }
     - { src: "workers", dest: "{{hadoop_home}}/etc/hadoop/workers" }
 
+- name: "Create a directory logs"
+  file:
+    path: "{{hadoop_home}}/logs"
+    state: "directory"
+
 - name: "Create a directory tmp"
   file:
     path: "{{ item }}"
     state: "directory"
   loop:
-    - "{{hadoop_home}}/tmp/hdfs/namenode"
-    - "{{hadoop_home}}/tmp/hdfs/datanode"
-    - "{{hadoop_home}}/logs"
     - "/tmp/hadoop-hadoop/dfs/namenode"
     - "/tmp/hadoop-hadoop/dfs/name"
     - "/tmp/hadoop-hadoop/"
@@ -54,3 +53,21 @@
   loop:
     - "{{hadoop_home}}"
     - "/tmp/hadoop-hadoop/"
+
+- name: "Add FQDN cluster - /etc/hosts "
+  lineinfile:
+    path: "/etc/hosts"
+    insertbefore: BOF
+    line: '{{ip_internal_master}} {{fqnd_cluster}}'
+
+- name: Create symbolic link - bin
+  file:
+    src: "{{hadoop_home}}/bin"
+    dest: "/usr/local/bin/hadoop"
+    state: link
+
+- name: Create symbolic link - sbin
+  file:
+    src: "{{hadoop_home}}/sbin"
+    dest: "/usr/local/sbin/hadoop"
+    state: link

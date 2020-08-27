@@ -1,8 +1,16 @@
-user_name: hadoop
-user_password: hadoop
-hadoop_base: /home/hadoop
-hadoop_home: /home/hadoop/hadoop-3.2.1
-mirror_ftp: "http://ftp.unicamp.br/pub/apache/hadoop/common/stable/hadoop-3.2.1.tar.gz"
-java_home: /usr/lib/jvm/java-1.8.0-openjdk-amd64
+user_name: "hadoop"
+user_password: "hadoop"
+
+fqnd_cluster: "hadoop"
+ip_internal_master: "127.0.0.1"
+
+hadoop_base: "/opt"
+hadoop_home: "{{hadoop_base}}/hadoop-3.2.1"
+
+mirror_uri_ftp: "http://ftp.unicamp.br/pub/apache/hadoop/common/stable/hadoop-3.2.1.tar.gz"
+java_home: "/usr/lib/jvm/java-1.8.0-openjdk-amd64"
+
 ip_slaves: "127.0.0.1"
 ip_master: "127.0.0.1"
+
+hdfs_replication: 1

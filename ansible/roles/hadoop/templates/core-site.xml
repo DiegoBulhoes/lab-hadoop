@@ -3,7 +3,7 @@
 <configuration>
     <property>
         <name>fs.default.name</name>
-        <value>hdfs://{{ip_master}}:9000</value>
+        <value>hdfs://{{fqnd_cluster}}:9000</value>
     </property>
     <property>
         <name>hadoop.tmp.dir</name>

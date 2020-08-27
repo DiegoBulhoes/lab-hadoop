@@ -1,5 +1,5 @@
 ---
-- name: "Provision Hadoop Cluster"
+- name: "Provision Docker Swarm Cluster"
   hosts: all
   become: yes
   tasks:
