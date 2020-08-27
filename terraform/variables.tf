@@ -34,6 +34,10 @@ variable "key_ssh" {
   type = string
 }
 
-variable "port_firewall_public" {
+variable "publ_net_firewall_port_UDP" {
+  type = list
+}
+
+variable "publ_net_firewall_port_TCP" {
   type = list
 }

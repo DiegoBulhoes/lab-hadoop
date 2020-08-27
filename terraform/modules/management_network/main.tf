@@ -22,12 +22,12 @@ resource "google_compute_firewall" "firewall_public_subnet" {
 
   allow {
     protocol = "tcp"
-    ports    = var.port_firewall_public
+    ports    = var.publ_net_firewall_port_TCP
   }
 
   allow {
     protocol = "udp"
-    ports    = var.port_firewall_public
+    ports    = var.publ_net_firewall_port_UDP
   }
 
   source_ranges = ["0.0.0.0/0"]
