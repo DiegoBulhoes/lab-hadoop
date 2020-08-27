@@ -15,7 +15,7 @@ resource "google_compute_instance" "worker" {
   }
 
   network_interface {
-    subnetwork = var.private_subnetwork
+    subnetwork = var.public_subnetwork
     access_config {
     }
   }
