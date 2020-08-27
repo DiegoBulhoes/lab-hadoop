@@ -1,5 +1,0 @@
-{% for ip in ip_slaves %}
-{{ ip }}
-{% endfor %}
-
-
