@@ -1,0 +1,4 @@
+ip_slaves: ["10.10.10.2"]
+ip_master: "10.10.10.3"
+
+ip_intern_master: "10.10.10.3"
