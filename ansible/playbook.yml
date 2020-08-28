@@ -1,5 +1,5 @@
 ---
-- name: "Provision Docker Swarm Cluster"
+- name: "Provision  Hadoop"
   hosts: all
   become: yes
   vars_files:
