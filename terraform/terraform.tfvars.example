@@ -4,6 +4,8 @@ region  = "us-central1"
 
 user_name = "gce"
 
+machine_type = "n1-standard-1"
+
 count_worker = 1
 
 count_manager = 1
@@ -14,8 +16,7 @@ subnet  = "subnetwork"
 
 ip_cidr_range_public = "10.10.0.0/24"
 
-
-key_ssh = "~/.ssh/id_rsa_gce_hadoop.pub"
+key_ssh = "~/.ssh/id_rsa.pub"
 
 publ_net_firewall_port_UDP =["0-65535"]
 
