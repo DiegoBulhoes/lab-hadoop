@@ -14,6 +14,10 @@ variable "project" {
   type = string
 }
 
+variable "machine_type" {
+  type = string
+}
+
 variable "count_worker" {
   type = number
 }
