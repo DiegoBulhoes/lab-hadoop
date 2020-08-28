@@ -2,9 +2,7 @@
 - name: "Provision Docker Swarm Cluster"
   hosts: all
   become: yes
-  tasks:
-    - name: "Include file - vars.yml"
-      include_vars: vars.yml
-    - name: "Include roles"
-      include_role:
-        name: hadoop
+  vars_files:
+    - ./vars.yml
+  roles:
+    - name: hadoop

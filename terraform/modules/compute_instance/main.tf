@@ -3,7 +3,7 @@ resource "google_compute_instance" "worker" {
   count        =  var.count_worker
   name         = "worker-${count.index + 1}"
   machine_type = "n1-standard-1"
-  tags         = ["worker", "monitoring"]
+  description  = "worker"
 
   boot_disk {
     initialize_params {
@@ -25,7 +25,7 @@ resource "google_compute_instance" "manager" {
   count        = var.count_manager
   name         = "manager-${count.index + 1}"
   machine_type = "n1-standard-1"
-  tags         = ["manager", "monitoring"]
+  description  = "manager"
 
   boot_disk {
     initialize_params {

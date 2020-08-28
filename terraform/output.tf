@@ -1,4 +1,4 @@
-output "worker_pinternal" {
+output "worker_internal" {
   value = module.compute_instance.worker_pinternal
 }
 
