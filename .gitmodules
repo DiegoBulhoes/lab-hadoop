@@ -1,6 +1,3 @@
 [submodule "ansible/roles/hadoop"]
 	path = ansible/roles/hadoop
 	url = https://github.com/DiegoBulhoes/ansible-hadoop.git
-[submodule "ansible/roles/hadoop-cluster"]
-	path = ansible/roles/hadoop-cluster
-	url = https://github.com/DiegoBulhoes/ansible-hadoop.git
