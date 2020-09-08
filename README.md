@@ -4,7 +4,7 @@ Laboratório básico para a ferramenta [Hadoop](http://hadoop.org/) provisionado
 
 ## Terraform
 
-O Terraform irá instanciar 2 maquinas e compartilhar a chave pública do host com as máquinas virtuais, **deverá ter o nome "id_rsa_gcp_erad.pub"**. Para passar as credenciais para o terraform basta popular a variável de ambiente **GOOGLE_APPLICATION_CREDENTIALS**.
+O Terraform irá instanciar 3 maquinas e compartilhar a chave pública do host com as máquinas virtuais, **deverá ter o nome "id_rsa_gcp_erad.pub"**. Para passar as credenciais para o terraform basta popular a variável de ambiente **GOOGLE_APPLICATION_CREDENTIALS**.
 
 ```shell
   export GOOGLE_APPLICATION_CREDENTIALS=<path_json>
@@ -48,7 +48,7 @@ Para isso, basta realizar o download do plugin **gce_compute**, executando o seg
 
 Para inicializar o Ansible:
 
-```shell
+````shell
   ansible-playbook -i inventory.gcp.yml -u gce  playbook.yml
 # Lab Hadoop
 
@@ -60,6 +60,12 @@ O Terraform irá instanciar 2 maquinas e compartilhar a chave pública do host c
 
 ```shell
   export GOOGLE_APPLICATION_CREDENTIALS=<path_json>
+````
+
+Para preparar o embiente será necessario inicializar os submodulos do git:
+
+```shell
+git submodule init
 ```
 
 ### Executando o Terraform
@@ -106,29 +112,28 @@ Para inicializar o Ansible:
 
 ## Exmemplo
 
-Para executar uma aplicação hadoop deve ser criada uma pasta de entrada e será gerada uma pasta de saída, a pasta de saída não pode existir.
+Para executar uma aplicação hadoop deve ser criada uma pasta de entrada e será gerada uma pasta de saída, a pasta de saída **não pode existir**.
 
 ```shell
-mkdir input
-$HADOOP_COMMON_HOME/etc/hadoop/*.xml input
-hadoop dfs -copyFromLocal input /in
+  mkdir input
+  cp $HADOOP_COMMON_HOME/etc/hadoop/*.xml input
 ```
 
 Copiar o diretorio inpout para o HDFS
 
 ```shell
-hadoop dfs -copyFromLocal input /in
+  hadoop dfs -copyFromLocal input /in
 ```
 
 executando o wordCount
 
 ```shell
-hadoop jar $HADOOP_COMMON_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.2.1.jar wordcount /in output
+  hadoop jar $HADOOP_COMMON_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.2.1.jar wordcount /in output
 ```
 
 Coletando a saída do HDFS
 
 ```shell
-bin/hdfs dfs -get output output
-cat output/*
+  hdfs dfs -get output output
+  cat output/*
 ```
