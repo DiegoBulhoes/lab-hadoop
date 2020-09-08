@@ -4,9 +4,9 @@ region  = "us-central1"
 
 user_name = "gce"
 
-machine_type = "n1-standard-1"
+machine_type = "e2-medium"
 
-count_worker = 1
+count_worker = 2
 
 count_manager = 1
 
