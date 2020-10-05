@@ -14,11 +14,11 @@ variable "ip_cidr_range_public" {
   type = string
 }
 
-variable "publ_net_firewall_port_UDP" {
+variable "firewall_ingress_port_UDP" {
   type = list
 }
 
-variable "publ_net_firewall_port_TCP" {
+variable "firewall_ingress_port_TCP" {
   type = list
 }
 
