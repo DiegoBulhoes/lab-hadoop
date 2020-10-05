@@ -1,9 +1,9 @@
-
 resource "google_compute_instance" "worker" {
-  count        =  var.count_worker
+  count        = var.count_worker
   name         = "worker-${count.index + 1}"
   machine_type = var.machine_type
   description  = "worker"
+  labels       = { "machine" : "worker" }
 
   boot_disk {
     initialize_params {
@@ -15,7 +15,7 @@ resource "google_compute_instance" "worker" {
   }
 
   network_interface {
-    subnetwork = var.public_subnetwork
+    subnetwork = var.subnetwork
     access_config {
     }
   }
@@ -26,6 +26,7 @@ resource "google_compute_instance" "manager" {
   name         = "manager-${count.index + 1}"
   machine_type = var.machine_type
   description  = "manager"
+  labels       = { "machine" = "manager" }
 
   boot_disk {
     initialize_params {
@@ -37,7 +38,7 @@ resource "google_compute_instance" "manager" {
   }
 
   network_interface {
-    subnetwork = var.public_subnetwork
+    subnetwork = var.subnetwork
     access_config {
     }
   }

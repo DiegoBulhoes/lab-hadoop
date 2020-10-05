@@ -18,6 +18,6 @@ ip_cidr_range_public = "10.10.0.0/24"
 
 key_ssh = "~/.ssh/id_rsa.pub"
 
-publ_net_firewall_port_UDP =["0-65535"]
+firewall_ingress_port_UDP =["0-65535"]
 
-publ_net_firewall_port_TCP =["0-65535"]
+firewall_ingress_port_TCP =["0-65535"]

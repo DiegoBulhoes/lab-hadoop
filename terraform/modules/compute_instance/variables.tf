@@ -18,7 +18,7 @@ variable "count_manager" {
   type = number
 }
 
-variable "public_subnetwork" {
+variable "subnetwork" {
   type = string
 }
 
