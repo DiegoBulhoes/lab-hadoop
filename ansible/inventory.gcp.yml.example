@@ -3,5 +3,5 @@ projects:
   - "gce-hadoop"
 auth_kind: serviceaccount
 keyed_groups:
-  - key: description
-    separator: ""
+  - prefix: gcp
+    key: labels

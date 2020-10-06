@@ -1,4 +1,4 @@
-ip_slaves: ["10.10.10.2"]
-ip_master: "10.10.10.3"
+ip_slaves: "{{ groups['gcp_machine_worker'] | map('extract', hostvars, ['ansible_default_ipv4', 'address']) | list }}"
+ip_master: "{{ groups['gcp_machine_manager'][0] }}"
 
-ip_intern_master: "10.10.10.3"
+ip_internal_master: "{{ hostvars[ip_master]['ansible_default_ipv4']['address']}}"
