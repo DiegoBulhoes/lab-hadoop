@@ -55,23 +55,23 @@ Para inicializar o Ansible:
 
 ## Exmemplo
 
-Para executar uma aplicação Hadoop deverá ser crio um diretorio no qual será gerado uma pasta de saída, a pasta de saída **não pode existir**.
+Para executar uma aplicação Hadoop deverá ser criado um diretório no qual será gerado uma pasta de saída, a pasta de saída **não pode existir**.
 
 ```shell
   mkdir input
   cp $HADOOP_COMMON_HOME/etc/hadoop/*.xml input
 ```
 
-Copiar o diretorio inpout para o HDFS
+Copiar o diretório inpout para o HDFS
 
 ```shell
   hadoop dfs -copyFromLocal input /in
 ```
 
-executando o wordCount
+executando o WordCount
 
 ```shell
-  hadoop jar $HADOOP_COMMON_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.2.1.jar wordcount /in output
+  hadoop jar $HADOOP_COMMON_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.0.jar wordcount /in output
 ```
 
 Coletando a saída do HDFS
