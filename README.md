@@ -35,8 +35,6 @@ export GCP_SERVICE_ACCOUNT_FILE=/path/keyfile.json  && \
 export GOOGLE_APPLICATION_CREDENTIALS=/path/keyfile.json
 ```
 
-## Terraform
-
 Um dos passos necessários para utilizar esse _setup_ é possuir uma par de _keys_ SSH, podendo ser gerado através do seguinte comando, para mais detalhes consulte a documentação atrves desse [link](https://wiki.debian.org/SSH)
 
 ```shell
