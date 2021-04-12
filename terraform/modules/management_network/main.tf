@@ -1,21 +1,21 @@
 resource "google_compute_network" "vpc_network" {
-  name                    = "${var.project}-network"
+  name                    = "hadoop-network"
   auto_create_subnetworks = "false"
 }
 
 resource "google_compute_subnetwork" "subnetwork" {
   region        = var.region
-  name          = "${var.project}-subnet"
+  name          = "hadoop-subnet"
   ip_cidr_range = var.ip_cidr_range_public
   network       = google_compute_network.vpc_network.id
   depends_on    = [google_compute_network.vpc_network]
 }
 
 resource "google_compute_firewall" "firewall_ingress" {
-  name        = "${var.project}-firewall-ingress"
+  name        = "hadoop-firewall-ingress"
   network     = google_compute_network.vpc_network.id
   direction   = "INGRESS"
-  source_tags = ["ingress"]
+  source_tags = ["hadoop-ingress"]
   priority    = 9000
 
   allow {

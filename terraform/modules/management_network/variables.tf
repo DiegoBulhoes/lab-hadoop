@@ -1,17 +1,10 @@
-variable "zone" {
-  type = string
-}
-
 variable "region" {
   type = string
 }
 
-variable "project" {
-  type = string
-}
-
 variable "ip_cidr_range_public" {
-  type = string
+  type    = string
+  default = "10.10.0.0/24"
 }
 
 variable "firewall_ingress_port_UDP" {

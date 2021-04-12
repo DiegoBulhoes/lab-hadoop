@@ -2,19 +2,7 @@ zone = "us-central1-a"
 
 region  = "us-central1"
 
-user_name = "gce"
-
-machine_type = "e2-medium"
-
-count_worker = 2
-
-count_manager = 1
-
-project  = "gce-hadoop"
-
-subnet  = "subnetwork"
-
-ip_cidr_range_public = "10.10.0.0/24"
+project  = "id_project"
 
 key_ssh = "~/.ssh/id_rsa.pub"
 

@@ -5,33 +5,37 @@ variable "zone" {
 variable "region" {
   type = string
 }
-
-variable "user_name" {
-  type = string
-}
-
 variable "project" {
   type = string
 }
 
-variable "machine_type" {
+variable "user_name" {
   type = string
+  default = "gce"
+}
+variable "machine_type" {
+  type         = string
+  default = "e2-medium"
 }
 
 variable "count_worker" {
-  type = number
+  type    = number
+  default = 2
 }
 
 variable "count_manager" {
-  type = number
+  type    = number
+  default = 1
 }
 
 variable "subnet" {
-  type = string
+  type    = string
+  default = "hadoop-subnetwork"
 }
 
 variable "ip_cidr_range_public" {
-  type = string
+  type    = string
+  default = "10.10.0.0/24"
 }
 
 variable "key_ssh" {
@@ -39,9 +43,9 @@ variable "key_ssh" {
 }
 
 variable "firewall_ingress_port_UDP" {
-  type = list
+  type = list(any)
 }
 
 variable "firewall_ingress_port_TCP" {
-  type = list
+  type = list(any)
 }

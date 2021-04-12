@@ -6,8 +6,6 @@ provider "google" {
 
 module "management_network" {
   source                     = "./modules/management_network"
-  project                    = var.project
-  zone                       = var.zone
   region                     = var.region
   ip_cidr_range_public       = var.ip_cidr_range_public
   firewall_ingress_port_UDP = var.firewall_ingress_port_UDP
@@ -16,7 +14,6 @@ module "management_network" {
 
 module "compute_instance" {
   source        = "./modules/compute_instance"
-  project       = var.project
   user_name     = var.user_name
   machine_type  = var.machine_type
   count_manager = var.count_manager
