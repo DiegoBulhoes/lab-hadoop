@@ -32,6 +32,6 @@ resource "google_compute_firewall" "firewall_ingress" {
     ports    = var.firewall_ingress_port_UDP
   }
 
-  source_ranges = ["0.0.0.0/0"]
+  source_ranges = var.source_ranges
   depends_on    = [google_compute_network.vpc_network]
 }

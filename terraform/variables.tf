@@ -48,4 +48,8 @@ variable "firewall_ingress_port_UDP" {
 
 variable "firewall_ingress_port_TCP" {
   type = list(any)
+variable "source_ranges" {
+  type = list(string)
+  default = ["0.0.0.0/0"]
+  description = "Source ranges"
 }

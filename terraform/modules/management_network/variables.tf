@@ -7,11 +7,16 @@ variable "ip_cidr_range_public" {
   default = "10.10.0.0/24"
 }
 
+variable "source_ranges" {
+  type    = list(string)
+  default = ["0.0.0.0/0"]
+}
+
 variable "firewall_ingress_port_UDP" {
-  type = list
+  type = list(any)
 }
 
 variable "firewall_ingress_port_TCP" {
-  type = list
+  type = list(any)
 }
 
