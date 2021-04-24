@@ -1,0 +1,8 @@
+---
+- name: "Provision  Hadoop"
+  hosts: gcp_machine_manager,gcp_machine_worker
+  become: yes
+  vars_files:
+    - ./vars.yml
+  roles:
+    - name: hadoop
