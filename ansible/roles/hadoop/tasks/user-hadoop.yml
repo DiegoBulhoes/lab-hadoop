@@ -3,6 +3,7 @@
     name: "{{user_name}}"
     password: "{{user_password}} | password_hash('sha512')"
     shell: "/bin/bash"
+    update_password: always
     generate_ssh_key: yes
 
 - name: "Get the public SSH key- id_rsa.pub - Master"
