@@ -16,6 +16,7 @@ ip_master: "127.0.0.1"
 
 hdfs_replication: 1
 path_dfs: "/dfs"
+dfs_blocksize: 268435456
 
 list_users: ["hadoop", "gce"]
 
