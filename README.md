@@ -8,9 +8,7 @@ O cluster Hadoop estiver instalado e funcionando, verifique a interface do usuá
 
 Service|url|Port
 ---|---|---
-NameNode | http://<<ip_master>>:port/ | Default HTTP port is 9870.
 ResourceManager  | http://<<ip_master>>:port/ | Default HTTP port is 8088.
-MapReduce JobHistory Server  | http://<<ip_master>>:port/ |efault HTTP port is 19888.
 
 ## Terraform
 
