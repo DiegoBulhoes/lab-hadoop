@@ -1,0 +1,41 @@
+- name: "Add the user {{user_name}}"
+  user:
+    name: "{{user_name}}"
+    password: "{{user_password}} | password_hash('sha512')"
+    shell: "/bin/bash"
+    generate_ssh_key: yes
+
+- name: "Get the public SSH key- id_rsa.pub - Master"
+  slurp:
+    src: "/home/{{user_name}}/.ssh/id_rsa.pub"
+  register: "ssh_public_hadoop"
+  delegate_to: "{{ip_master}}" 
+
+- name: "Get the private SSH key - id_rsa.pub - Master"
+  slurp:
+    src: "/home/{{user_name}}/.ssh/id_rsa"
+  register: "ssh_private_hadoop"
+  delegate_to: "{{ip_master}}" 
+
+- name: "Add key SSH - id_rsa.pub - Master"
+  copy:
+    content: "{{ ssh_public_hadoop['content'] | b64decode }}"
+    dest: "/home/{{user_name}}/.ssh/id_rsa.pub"
+  when: inventory_hostname != ip_master
+
+- name: "Add key SSH - id_rsa - Master"
+  copy:
+    content: "{{ ssh_private_hadoop['content'] | b64decode }}"
+    dest: "/home/{{user_name}}/.ssh/id_rsa"
+  when: inventory_hostname != ip_master
+
+- name: "Create file - authorized_keys"
+  authorized_key:
+    user: "{{user_name}}"
+    key: "{{ssh_public_hadoop['content'] | b64decode}}"
+  
+- name: "Change Hadoop files permission"
+  file:
+    path: "{{hadoop_base}}"
+    group: "{{user_name}}"
+    owner: "{{user_name}}"

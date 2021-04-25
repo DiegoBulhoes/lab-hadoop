@@ -1,0 +1,91 @@
+- name: "Insert env Hadoop - bashrc"
+  blockinfile:
+    path: "/home/{{item}}/.bashrc"
+    block: |
+      export JAVA_HOME="{{java_home}}"
+      export HADOOP_HOME="{{hadoop_home}}"
+      export HADOOP_MAPRED_HOME="{{hadoop_home}}"
+      export HADOOP_COMMON_HOME="{{hadoop_home}}"
+      export HADOOP_HDFS_HOME="{{hadoop_home}}"
+      export HADOOP_YARN_HOME="{{hadoop_home}}"
+      export HADOOP_LOG_DIR="{{hadoop_log_dir}}"
+      export PATH=/bin/hadoop:/bin/hadoop:$PATH
+      export HADOOP_CONF_DIR="{{hadoop_home}}/etc/hadoop"
+  loop: "{{list_users}}"
+
+- name: "Add files template -  hadoop"
+  template:
+    src: "{{item.src}}"
+    dest: "{{item.dest}}"
+  with_items:
+    - { src: "hdfs-site.xml", dest: "{{hadoop_home}}/etc/hadoop/hdfs-site.xml" }
+    - { src: "core-site.xml", dest: "{{hadoop_home}}/etc/hadoop/core-site.xml" }
+    - { src: "hadoop-env.sh", dest: "{{hadoop_home}}/etc/hadoop/hadoop-env.sh" }
+    - { src: "yarn-env.sh", dest: "{{hadoop_home}}/etc/hadoop/yarn-env.sh" }
+    - {
+        src: "mapred-site.xml",
+        dest: "{{hadoop_home}}/etc/hadoop/mapred-site.xml",
+      }
+    - { src: "yarn-site.xml", dest: "{{hadoop_home}}/etc/hadoop/yarn-site.xml" }
+    - { src: "masters", dest: "{{hadoop_home}}/etc/hadoop/masters" }
+    - { src: "slaves", dest: "{{hadoop_home}}/etc/hadoop/slaves" }
+    - { src: "workers", dest: "{{hadoop_home}}/etc/hadoop/workers" }
+
+- name: "Create a directory logs"
+  file:
+    path: "{{hadoop_log_dir}}"
+    state: "directory"
+
+- name: "Create a directory dfs"
+  file:
+    path: "{{ item }}"
+    state: "directory"
+  loop:
+    - "{{path_dfs}}"
+    - "{{path_dfs}}/namenode"
+    - "{{path_dfs}}/name"
+
+- name: "Change hadoop files permission"
+  file:
+    path: "{{item}}"
+    owner: "hadoop"
+    group: "hadoop"
+    recurse: yes
+  loop:
+    - "{{hadoop_home}}"
+    - "{{path_dfs}}"
+    - "{{hadoop_log_dir}}"
+
+- name: "Add FQDN cluster - /etc/hosts "
+  lineinfile:
+    path: "/etc/hosts"
+    insertbefore: BOF
+    line: "{{ip_internal_master}} {{fqnd_cluster}}"
+
+- name: "Find all files in {{hadoop_home}}/bin/"
+  find:
+    paths: ["{{hadoop_home}}/bin/"]
+  register: bin_hadoop
+  changed_when: False
+
+- name: Create symbolic link - bin
+  become: True
+  file:
+    src: "{{ item.path }}"
+    path: "/bin/{{ item.path | basename }}"
+    state: link
+  with_items: "{{ bin_hadoop.files }}"
+
+- name: "Find all files in {{hadoop_home}}/bin/"
+  find:
+    paths: ["{{hadoop_home}}/sbin/"]
+  register: sbin_hadoop
+  changed_when: False
+
+- name: Create symbolic link - sbin
+  become: True
+  file:
+    src: "{{ item.path }}"
+    path: "/bin/{{ item.path | basename }}"
+    state: link
+  with_items: "{{ sbin_hadoop.files }}"

@@ -1,3 +1,13 @@
+terraform {
+  required_version = "0.14.5"
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "3.64.0"
+    }
+  }
+}
+
 provider "google" {
   project = var.project
   region  = var.region
@@ -5,11 +15,12 @@ provider "google" {
 }
 
 module "management_network" {
-  source                     = "./modules/management_network"
-  region                     = var.region
-  ip_cidr_range_public       = var.ip_cidr_range_public
+  source                    = "./modules/management_network"
+  region                    = var.region
+  ip_cidr_range_public      = var.ip_cidr_range_public
   firewall_ingress_port_UDP = var.firewall_ingress_port_UDP
   firewall_ingress_port_TCP = var.firewall_ingress_port_TCP
+  source_ranges             = var.source_ranges
 }
 
 module "compute_instance" {

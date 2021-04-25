@@ -1,0 +1,17 @@
+galaxy_info:
+  author: DiegoBulhoes
+  description: your role description
+
+  license: license MIT
+
+  min_ansible_version: 2.9
+
+  platforms:
+    - name: ubuntu
+      versions:
+        - 18.04
+        - 20.04
+    - name: debian
+      versions:
+        - 9
+        - 10

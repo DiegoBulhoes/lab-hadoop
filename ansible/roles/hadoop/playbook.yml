@@ -1,0 +1,6 @@
+---
+- name: "Provision Hadoop Cluster"
+  hosts: all
+  become: yes
+  roles:
+    - hadoop
