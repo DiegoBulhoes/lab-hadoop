@@ -13,4 +13,8 @@
         <name>dfs.datanode.data.dir</name>
         <value>{{path_dfs}}/datanode</value>
     </property>
+    <property>
+        <name>dfs_blocksize</name>
+        <value>{{dfs_blocksize}}</value>
+    </property>
 </configuration>
