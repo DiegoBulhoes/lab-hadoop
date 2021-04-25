@@ -4,7 +4,7 @@ Laboratório básico para a ferramenta [Hadoop](http://hadoop.org/) provisionado
 
 ## Web Interfaces
 
-Assim que o cluster Hadoop estiver instalado e funcionando, verifique a interface do usuário da web dos componentes conforme descrito abaixo:
+O cluster Hadoop estiver instalado e funcionando, verifique a interface do usuário da web dos componentes conforme descrito abaixo:
 
 Service|url|Port
 ---|---|---
@@ -14,7 +14,7 @@ MapReduce JobHistory Server  | http://<<ip_master>>:port/ |efault HTTP port is 1
 
 ## Terraform
 
-O Terraform irá instanciar 3 maquinas e compartilhar a chave pública do host com as máquinas virtuais, **deverá ter o nome "id_rsa.pub"**. Para passar as credenciais para o terraform basta popular a variável de ambiente **GOOGLE_APPLICATION_CREDENTIALS**.
+O Terraform irá instanciar 3 máquinas e compartilhar a chave pública do host com as máquinas virtuais, **deverá ter o nome "id_rsa.pub"**. Para passar as credenciais para o terraform basta popular a variável de ambiente **GOOGLE_APPLICATION_CREDENTIALS**.
 
 ```shell
   export GOOGLE_APPLICATION_CREDENTIALS=<path_json>
@@ -25,7 +25,7 @@ O Terraform irá instanciar 3 maquinas e compartilhar a chave pública do host c
 Clonar o projeto
 
 ```shell
-git clone --recurse-submodules https://github.com/DiegoBulhoes/lab-hadoop
+git clone  https://github.com/DiegoBulhoes/lab-hadoop
 ```
 
 Exportar as variáveis de ambiente
@@ -59,7 +59,7 @@ Para verificar se os arquivos possui algum erro de sintaxe ou de configuração 
 terraform plan
 ```
 
-Após a verificação do _plan_ execulte o seuinte comando para realizar o processo de instanciação
+Após a verificação do _plan_ execulte o seguinte comando para realizar o processo de instanciação
 
 ```shell
 terraform apply
@@ -91,11 +91,13 @@ Para realizar a configuração do ambiente será necessário popular a variável
 
 ### Executar o Ansible
 
-Para isso, basta realizar o download do plugin **gce_compute**, executando o seguinte comando:
+Para execultar o Ansible será necessário realizar o download do plugin **gce_compute**:
 
 ```shell
   pip3 install requests google-auth
 ```
+
+Crie os arquivos `inventory.gcp.yml` e `playbook.yml`, utilize os exemplos.
 
 Para inicializar o Ansible:
 
@@ -103,8 +105,7 @@ Para inicializar o Ansible:
   ansible-playbook -i inventory.gcp.yml -u gce  playbook.yml
 
 ```
-
-## Exmemplo
+## Exemplo
 
 Para executar uma aplicação Hadoop deverá ser criado um diretório no qual será gerado uma pasta de saída, a pasta de saída **não pode existir**.
 
@@ -126,19 +127,19 @@ Para executar uma aplicação Hadoop deverá ser criado um diretorio no qual ser
   cp $HADOOP_COMMON_HOME/etc/hadoop/*.xml input
 ```
 
-Copiar o diretório inpout para o HDFS
+Copiar o diretório input para o HDFS
 
 ```shell
   hadoop dfs -copyFromLocal input /in
 ```
 
-executando o WordCount
+Execultar o WordCount
 
 ```shell
   hadoop jar $HADOOP_COMMON_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.0.jar wordcount /in output
 ```
 
-Coletando a saída do HDFS
+Coletar a saída do HDFS
 
 ```shell
   hdfs dfs -get output output
