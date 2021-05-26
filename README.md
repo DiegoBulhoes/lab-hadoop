@@ -134,7 +134,7 @@ Copiar o diretório input para o HDFS
 Execultar o WordCount
 
 ```shell
-  hadoop jar $HADOOP_COMMON_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.0.jar wordcount /in output
+  hadoop jar $HADOOP_COMMON_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.2.2.jar wordcount /in output
 ```
 
 Coletar a saída do HDFS
