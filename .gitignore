@@ -27,5 +27,7 @@ override.tf.json
 
 .env
 
+ansible/playbook.yml
+
 **/*inventory.*
 !**/inventory.gcp.yml.example
