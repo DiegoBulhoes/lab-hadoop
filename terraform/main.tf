@@ -1,5 +1,5 @@
 terraform {
-  required_version = "0.14.5"
+  required_version = ">= 0.14.5"
   required_providers {
     google = {
       source  = "hashicorp/google"
@@ -15,12 +15,14 @@ provider "google" {
 }
 
 module "management_network" {
-  source                    = "./modules/management_network"
-  region                    = var.region
-  ip_cidr_range_public      = var.ip_cidr_range_public
-  firewall_ingress_port_UDP = var.firewall_ingress_port_UDP
-  firewall_ingress_port_TCP = var.firewall_ingress_port_TCP
-  source_ranges             = var.source_ranges
+  source                          = "./modules/management_network"
+  region                          = var.region
+  ip_cidr_range_public            = var.ip_cidr_range_public
+  list_TCP_ports_internal_cluster = var.list_TCP_ports_internal_cluster
+  list_UDP_ports_internal_cluster = var.list_UDP_ports_internal_cluster
+  list_TCP_ports_external_cluster = var.list_TCP_ports_external_cluster
+  list_UDP_ports_external_cluster = var.list_UDP_ports_external_cluster
+  range_IP_access_cluster         = var.range_IP_access_cluster
 }
 
 module "compute_instance" {

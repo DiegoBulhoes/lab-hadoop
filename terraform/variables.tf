@@ -54,16 +54,29 @@ variable "key_ssh" {
   description = "SSH public key file path"
 }
 
-variable "firewall_ingress_port_UDP" {
+variable "list_TCP_ports_internal_cluster" {
   type        = list(string)
   description = "Set of ports that will be released on the firewall"
+  default     = ["0-65535"]
 }
 
-variable "firewall_ingress_port_TCP" {
+variable "list_UDP_ports_internal_cluster" {
   type        = list(string)
   description = "Set of ports that will be released on the firewall"
+  default     = ["0-65535"]
 }
-variable "source_ranges" {
+variable "list_TCP_ports_external_cluster" {
+  type        = list(string)
+  description = "Set of ports that will be released on the firewall"
+  default     = [22, 8088, 9870]
+}
+
+variable "list_UDP_ports_external_cluster" {
+  type        = list(string)
+  description = "Set of ports that will be released on the firewall"
+  default     = [22, 8088, 9870]
+}
+variable "range_IP_access_cluster" {
   type        = list(string)
   default     = ["0.0.0.0/0"]
   description = "Source ranges"

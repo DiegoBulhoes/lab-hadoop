@@ -114,32 +114,32 @@ hdfs namenode -format
 Inicialize os serviços:
 
 ```shell
-  start-dfs.sh
-  start-yarn.sh
+start-dfs.sh
+start-yarn.sh
 ```
 
 Para executar uma aplicação Hadoop deverá ser criado um diretorio no qual será gerado uma pasta de saída, a pasta de saída **não pode existir**.
 
 ```shell
-  mkdir input
-  cp $HADOOP_COMMON_HOME/etc/hadoop/*.xml input
+mkdir input
+cp $HADOOP_COMMON_HOME/etc/hadoop/*.xml input
 ```
 
 Copiar o diretório input para o HDFS
 
 ```shell
-  hadoop dfs -copyFromLocal input /in
+hadoop dfs -copyFromLocal input /in
 ```
 
 Execultar o WordCount
 
 ```shell
-  hadoop jar $HADOOP_COMMON_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.2.2.jar wordcount /in output
+hadoop jar $HADOOP_COMMON_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.2.2.jar wordcount /in output
 ```
 
 Coletar a saída do HDFS
 
 ```shell
-  hdfs dfs -get output output
-  cat output/*
+hdfs dfs -get output output
+cat output/*
 ```
