@@ -7,16 +7,30 @@ variable "ip_cidr_range_public" {
   default = "10.10.0.0/24"
 }
 
-variable "source_ranges" {
+variable "range_IP_access_cluster" {
   type    = list(string)
   default = ["0.0.0.0/0"]
+  description = "Range of IP that can access the cluster"
 }
 
-variable "firewall_ingress_port_UDP" {
+variable "list_TCP_ports_internal_cluster" {
   type = list(any)
+  description = "list TCP ports internal cluster"
 }
 
-variable "firewall_ingress_port_TCP" {
+variable "list_UDP_ports_internal_cluster" {
   type = list(any)
+  description = "list UDP ports internal cluster"
+}
+
+
+variable "list_TCP_ports_external_cluster" {
+  type = list(any)
+  description = "list TCP ports external cluster"
+}
+
+variable "list_UDP_ports_external_cluster" {
+  type = list(any)
+  description = "list UDP ports external cluster"
 }
 
